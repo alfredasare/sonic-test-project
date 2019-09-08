@@ -1,0 +1,17 @@
+{% extends 'music/base.html' %}
+{% block title %}Delete {{ object }}{% endblock %}
+
+{% block body %}
+<div class="container confirm-delete">
+    <div class="row">
+        <div class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2">
+            <form action="" method="post">
+                {% csrf_token %}
+                <h1 style="margin-bottom: 50px;">Delete {{ object }} ?</h1>
+                <p style="font-size: 20px;">Are you sure you want to delete "{{ object }} ?"</p>
+                <input type="submit" value="Confirm" />
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'music/base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="container albums">
+	<div class="row">
+		<div id="album-list" class="col-xs-12">
+            <div class="album-head"><h1>Here are the albums that contain <b>"{{ request.GET.q }}"</b></h1></div>
+		</div>
+		<div class="col-xs-12">
+			<div class="album-list">
+				{% if queryset %}
+					{% for album in queryset %}
+					<div class="col-xs-4 album-item">
+						<img class="album-img img-responsive" src="{{ album.album_art.url }}">
+						<div class="album-info">
+							<p class="album-name"><a style="color: rgba(0,0,0,1.00);" href="{% url 'music:album-update' album.id %}">{{ album.album_title }}</a></p>
+							<hr>
+							<p class="artist">{{ album.artist }}</p>
+							<hr>
+							<a href="{% url 'music:detail' album.id%}" class="details-link">View Details</a>
+							<hr>
+							<div class="fa-holder">
+								{% if album.is_favorite %}
+									<a style="color: yellow;" href="{% url 'music:favorite-album' album.id %}">
+										<i style="width: 50px;" class="fa fa-star"></i>
+									</a>
+								{% else %}
+									<a style="color: rgba(0,0,0,1.00);" href="{% url 'music:favorite-album' album.id %}">
+										<i style="width: 50px;" class="fa fa-star"></i>
+									</a>
+								{% endif %}
+								<a class="details-link" href="{% url 'music:album-delete' album.id %}"><i style="width: 50px;" class="fa fa-trash-o"></i></a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					<div style="text-align: center; font-size: 17px;" class="col-xs-12">
+						<div class="pagination">
+							<span class="step-links">
+								{% if queryset.has_previous %}
+									<a style="color: rgba(0,0,255,0.7);" href="/music?page={{ queryset.previous_page_number }}&q={{ request.GET.q }}">previous</a>
+								{% endif %}
+								<span class="current">
+									Page {{ queryset.number }} of {{ queryset.paginator.num_pages }}.
+								</span>
+								{% if queryset.has_next %}
+									<a style="color: rgba(0,0,255,0.7);" href="/music?page={{ queryset.next_page_number }}&q={{ request.GET.q }}">next</a>
+								{% endif %}
+							</span>
+						</div>
+					</div>
+				{% else %}
+				<p>You currently have no albums in your playlist</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

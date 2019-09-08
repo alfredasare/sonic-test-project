@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Title{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'music/static/style/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'music/static/style/font-awesome.css' %}" >
+    <link rel="stylesheet" type="text/css" href="{% static 'music/static/style/style.css' %}" />
+</head>
+<body>
+
+{% include 'music/navbar.html' %}
+
+
+{% block body %}
+{% endblock %}
+
+
+
+
+
+<!-- footer -->
+<div class="footer">
+
+<div id="back-to-top"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+          <div class="contact">
+            <h4 class="contact-head">CONTACT US</h4>
+            <p class="email">Email us on <a class="email-link" href="mailto:emailaddress">someemailhere@gmail.com</a></p>
+            <p class="phone">Phone no. 555555555</p>
+          </div>
+      </div>
+    <div class="col-xs-12 col-sm-6">
+          <div class="social">
+              <a href="#"><i class="fa fa-facebook footer-social facebook"></i></a>
+              <a href="#"><i class="fa fa-twitter footer-social twitter"></i></a>
+              <a href="#"><i class="fa fa-instagram footer-social instagram"></i></a>
+      </div>
+            <div class="creator-info">
+              <div class="creator">Made by <span class="">.........</span></div>
+        <div class="copyright">Copyright &copy; 2017. All rights reserved</div>
+            </div>
+        </div>
+  </div>
+</div>
+
+<div class="footer-logo">
+  <a href="#"><span></span></a>
+</div>
+</div>
+
+<!-- footer end -->
+<script type="text/javascript" src="{% static 'music/static/js/jquery-1.11.2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'music/static/js/bootstrap.js' %}"></script>
+<script type="text/javascript" src="{% static 'music/static/js/javascript.js' %}"></script>
+</body>
+</html>

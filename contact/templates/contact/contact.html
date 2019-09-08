@@ -1,0 +1,21 @@
+{% extends 'music/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3" style="background-color: white; margin-top: 60px; margin-bottom: 60px;"> 
+			<form role="form" method="post" enctype="multipart/form-data" action="">
+				{% csrf_token %}
+				<h1 style="margin-bottom: 20px; padding: 25px;">{{ title }}</h1>
+				<p style="margin-bottom: 30px; font-size: 17px;">{{ confirm_message }}</p>
+				{{ form|crispy }}
+				<div class="form-group">
+					<button type="submit">SUBMIT</button>
+				</div>
+			</form>
+	 </div>
+	</div>
+</div>
+{% endblock %}

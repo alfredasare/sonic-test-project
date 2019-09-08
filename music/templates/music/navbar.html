@@ -1,0 +1,59 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="{% url 'music:index' %}" class="navbar-brand">Sonic</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a class="page-scroll" href="/music/#album-list">
+                        <span class="fa fa-book" aria-hidden="true"></span>&nbsp;Albums
+                    </a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#">
+                        <span class="fa fa-music" aria-hidden="true"></span>&nbsp;Songs
+                    </a>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-left" role="search" method="get" action="#">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="{% url 'music:album-add' %}">
+                        <span class="fa fa-plus"></span>&nbsp; Add Album
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'account_logout' %}">
+                        <span class="fa fa-power-off"></span>&nbsp; Logout
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        {% if user %}
+                            <span>{{ user.username }}</span>
+                        {% endif %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</nav>

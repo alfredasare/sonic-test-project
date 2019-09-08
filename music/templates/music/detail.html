@@ -1,0 +1,66 @@
+{% extends 'music/base.html' %}
+{% block title %}Album Details{% endblock %}
+
+{% block body %}
+	<div style="margin-top: 40px;" class="container">
+		<div class="row">
+			<h1 style="text-align: center;margin-bottom: 50px;">Listen To Your Songs Here</h1>
+			<div style="margin-top: 60px;" class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-0">
+				<img class="detail-img img-responsive" src="{{ album.album_art.url }}" alt="">
+			    <div class="detail-album-info">
+				    <p>{{ album.album_title }} | {{ album.genre }}</p>
+				    <p>{{ album.artist }}</p>
+			    </div>
+			    {% if error_message %}
+			        <p><strong>{{ error_message }}</strong></p>
+			    {% endif %}
+			</div>
+			<div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-0">
+				<!--Navigation -->
+				 <ul id="myTab" class="nav nav-pills"> 
+				     <li role="presentaion" class="active"><a id="tab-link" href="{% url 'music:detail' album.id %}">All Songs</a></li> 
+				     <li role="presentaion"><a id="tab-link" href="{% url 'music:song-add' album.id %}">Add New Song</a></li> 
+				 </ul> 
+				 <!--Navigation end-->
+				 
+				 
+				 <div style="background-color: white; margin-bottom: 50px;"> 
+				 	<h1 style="padding-top: 30px; padding-left: 30px;">All Songs</h1>
+						<table style="margin-top: 30px; text-align: center;" class="table table-responsive table-hover table-striped table-condensed" width="700" border="0" cellspacing="0">
+						  <tbody>
+						    <tr class="section-head">
+						      <td>Song Title</td>
+						      <td>Audio File</td>
+						      <td>Favorite</td>
+						      <td>Actions</td>
+						    </tr>
+						    {% for song in album.song_set.all %}
+						    <tr>
+						      <td><p style="font-size: 18px;">{{song.song_title}}</p></td>				      
+						      	<td>
+						      		<audio src="{{ song.file.url }}" controls id="audioPlayer">
+										Sorry, your browser doesn't support html5 audio
+									</audio>
+						      	</td>
+						      <td>
+						      	{% if song.is_favorite %}
+									<a style="color: yellow;" href="{% url 'music:favorite-song' song.id %}">
+										<i style="width: 50px;" class="fa fa-star"></i>
+									</a>
+								{% else %}
+									<a style="color: rgba(0,0,0,1.00);" href="{% url 'music:favorite-song' song.id %}">
+										<i style="width: 50px;" class="fa fa-star"></i>
+									</a>
+								{% endif %}
+						      </td>
+						      <td><a style="color: rgba(20,20,20,1.00); font-size: 18px;" href="{% url 'music:song-delete' album.id song.id %}">Delete</a></td>
+						    </tr>
+						    {% endfor %}
+						  </tbody>
+						</table>
+				 </div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
